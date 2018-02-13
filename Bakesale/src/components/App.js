@@ -27,9 +27,10 @@ class App extends React.Component {
         );
     };
 
+
     render() {
         if (this.state.currentDealId) {
-            return <DealDetail deal={this.currentDeal()}/>
+            return <DealDetail initialDealData={this.currentDeal()} />
         }
         if (this.state.deals.length > 0) {
             return <DealList deals={this.state.deals} onItemPress={this.setCurrentDeal} />
