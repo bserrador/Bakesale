@@ -64,7 +64,6 @@ class DealDetail extends Component {
 const styles = StyleSheet.create({
     deal: {
       marginHorizontal: 12,
-      marginTop: 50,
     },
     backLink: {
       marginBottom: 5,
