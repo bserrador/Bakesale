@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { View, Text, Image, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
 
 import { priceDisplay } from '../util';
 import ajax from '../ajax';
@@ -9,6 +9,7 @@ import ajax from '../ajax';
 class DealDetail extends Component {
   static propTypes = {
     initialDealData: PropTypes.object.isRequired,
+    onBack: PropTypes.func.isRequired,
   };
 
   state = {
@@ -26,10 +27,14 @@ class DealDetail extends Component {
     const { deal } = this.state;
     return (
       <View style={styles.deal}>
+        <TouchableOpacity onPress={this.props.onBack}>
+          <Text style={styles.backLink}>Back</Text>
+        </TouchableOpacity>
           <Image
             source={{ uri: this.state.deal.media[0] }}
             style={styles.image}
             />
+            <View style={styles.detail}>
             <View>
               <Text style={styles.title}>{deal.title}</Text>
             </View>
@@ -49,7 +54,8 @@ class DealDetail extends Component {
               <View style={styles.description}>
                 <Text>{deal.description}</Text>
               </View>
-            </ScrollView>         
+            </ScrollView>   
+            </View>      
       </View>
     );
   }
@@ -57,7 +63,12 @@ class DealDetail extends Component {
 
 const styles = StyleSheet.create({
     deal: {
-      marginBottom: 20,
+      marginHorizontal: 12,
+      marginTop: 50,
+    },
+    backLink: {
+      marginBottom: 5,
+      color: '#22f',
     },
     image: {
         width: '100%',
@@ -75,6 +86,11 @@ const styles = StyleSheet.create({
       justifyContent: 'space-around',
       alignItems: 'center',
       marginTop: 15,
+    },
+    detail: {
+      borderColor: '#ddd',
+      borderWidth: 1,
+      borderStyle: 'dotted',
     },
     info: {
       alignItems: 'center',
@@ -94,9 +110,7 @@ const styles = StyleSheet.create({
       borderRadius: 30,
     },
     description: {
-      borderColor: '#ddd',
-      borderWidth: 1,
-      borderStyle: 'dotted',
+     
       margin: 10,
       padding: 10,
     },
